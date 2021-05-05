@@ -22,18 +22,25 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ path('app_login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ path('registration') }}">Register</a>
-                    </li>
+                    {% if is_granted('IS_ANONYMOUS') %}
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ path('app_login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ path('registration') }}">Register</a>
+                        </li>
+                    {% endif %}
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
                         </li>
                     {% endif %}
                     </ul>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <div class="d-flex flex-row-reverse">
+                            Logged in as {{ app.user.username}}
+                        <div>
+                    {% endif %}
                 </div>
             </div>
         </nav>
