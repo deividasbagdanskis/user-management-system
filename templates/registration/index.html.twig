@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register | User manager{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="my-3">Register</h2>
+        {{ form_start(form) }}
+            {% if (form_errors(form.password.first) ) %}
+                <div class="alert alert-danger">{{ form_errors(form.password.first) }}</div>
+            {% endif %}
+            <div class="mb-3">
+                {{ form_label(form.username, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.username, {'attr': { 'class': 'form-control' }}) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.password.first, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.password.first, {'attr': { 'class': 'form-control' }}) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.password.second, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.password.second, {'attr': { 'class': 'form-control' }}) }}
+            </div>
+            {{ form_row(form.register, {'attr': {'class': 'btn btn-primary'}}) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

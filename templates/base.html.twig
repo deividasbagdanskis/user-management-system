@@ -25,6 +25,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ path('app_login') }}">Login</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ path('registration') }}">Register</a>
+                    </li>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
