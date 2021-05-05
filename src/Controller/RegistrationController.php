@@ -11,13 +11,14 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
+use App\Repository\UserRepository;
 
 class RegistrationController extends AbstractController
 {
     /**
      * @Route("/register", name="registration")
      */
-    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepository): Response
     {
         $form = $this->createFormBuilder()
             ->add('username')
@@ -43,6 +44,15 @@ class RegistrationController extends AbstractController
             );
             $user->setRoles(['ROLE_USER']);
 
+            if ($userRepository->findByUsername($user->getUsername())) {
+                $usernameError = 'This username is already taken';
+
+                return $this->render('registration/index.html.twig', [
+                    'form' => $form->createView(),
+                    'usernameError' => $usernameError
+                ]);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -51,7 +61,8 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'usernameError' => ''
         ]);
     }
 }
