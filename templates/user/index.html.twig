@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users | User manager{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="h2 my-3">User index</h1>
+        <a href="{{ path('users-new') }}">Create new</a>
+
+        <table class="mt-3 table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>
+                        <a href="{{ path('users-show', {'id': user.id}) }}">show</a>
+                        <a href="{{ path('users-edit', {'id': user.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

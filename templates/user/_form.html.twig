@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    <div class="mb-3">
+        {{ form_label(form.username, null, {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.username, {'attr': { 'class': 'form-control' }}) }}
+    </div>
+    <div class="mb-3">
+        {{ form_label(form.password, null, {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.password, {'attr': { 'class': 'form-control' }}) }}
+    </div>
+    <button class="btn btn-primary mb-3" type="submit">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

@@ -30,9 +30,14 @@
                             <a class="nav-link" aria-current="page" href="{{ path('registration') }}">Register</a>
                         </li>
                     {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ path('users-index') }}">Users</a>
+                        </li>
+                    {% endif %}
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                            <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
                         </li>
                     {% endif %}
                     </ul>

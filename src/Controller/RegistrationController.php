@@ -18,8 +18,11 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="registration")
      */
-    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepository): Response
-    {
+    public function index(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        UserRepository $userRepository
+    ): Response {
         $form = $this->createFormBuilder()
             ->add('username')
             ->add('password', RepeatedType::class, [
