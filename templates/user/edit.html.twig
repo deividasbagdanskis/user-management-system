@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User | User manager{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="my-3">Edit user</h1>
+
+    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('users-index') }}">back to list</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+</div>
+
+{% endblock %}
