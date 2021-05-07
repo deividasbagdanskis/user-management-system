@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Groups | User manager{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="h2 my-3">Groups</h1>
+        <a href="{{ path('groups-new') }}">Create new</a>
+
+        <table class="mt-3 table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for group in groups %}
+                <tr>
+                    <td>{{ group.id }}</td>
+                    <td>{{ group.name }}</td>
+                    <td>
+                        <a href="{{ path('groups-show', {'id': group.id}) }}">show</a>
+                        <a href="{{ path('groups-edit', {'id': group.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

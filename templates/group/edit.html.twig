@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit group | User manager{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="my-3">Edit group</h1>
+
+    {{ include('group/_form.html.twig') }}
+
+    <a href="{{ path('groups-index') }}">back to list</a>
+    {{ include('group/_delete_form.html.twig') }}
+</div>
+
+{% endblock %}

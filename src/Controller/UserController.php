@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\GroupRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,10 +33,17 @@ class UserController extends AbstractController
     public function new(
         Request $request,
         UserRepository $userRepository,
-        UserPasswordEncoderInterface $passwordEncoder
+        UserPasswordEncoderInterface $passwordEncoder,
+        GroupRepository $groupRepository
     ): Response {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+
+        $groups = $groupRepository->findAll();
+
+        $form = $this->createForm(UserType::class, $user, [
+            'groups' => $groups
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -86,9 +94,15 @@ class UserController extends AbstractController
     public function edit(
         Request $request,
         User $user,
-        UserPasswordEncoderInterface $passwordEncoder
+        UserPasswordEncoderInterface $passwordEncoder,
+        GroupRepository $groupRepository
     ): Response {
-        $form = $this->createForm(UserType::class, $user);
+        $groups = $groupRepository->findAll();
+
+        $form = $this->createForm(UserType::class, $user, [
+            'groups' => $groups
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

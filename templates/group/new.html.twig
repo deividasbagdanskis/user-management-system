@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Group | User manager{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="my-3">Create a new group</h1>
+
+    {{ include('group/_form.html.twig') }}
+
+    <a href="{{ path('groups-index') }}">back to list</a>
+</div>
+
+{% endblock %}
