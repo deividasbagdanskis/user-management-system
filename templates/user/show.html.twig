@@ -14,7 +14,7 @@
             <dt class="col-sm-2">Groups</dt>
             <dd class="col-sm-10">
                 {% for group in user.groups %}
-                    {{ group.name }} <br/>
+                    <a href="{{ path('groups-show', {'id': group.id}) }}">{{ group.name }}</a><br/>
                 {% endfor %}
             </dd>
         </dl>
